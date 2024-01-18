@@ -1,0 +1,69 @@
+﻿
+@{
+    var paths = Context.Request.Path.ToString().Trim().Split('/').ToList();
+    var currentControllerName = paths.ElementAt(1).ToLower();
+    if (paths.Count() > 2)
+    {
+        currentControllerName = paths.ElementAt(2).ToLower();
+    }
+}
+
+
+<!-- Menu -->
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+
+    <div class="app-brand demo ">
+        <a href="/Admin" class="app-brand-link">
+            <span class="app-brand-link">
+                <img src="~/site/assets/images/sanayiyolutransparan.png" style="width: 50px; height: 50px;" />
+            </span>
+            <span class="app-brand-text demo menu-text fw-bold ms-2">Mağazam</span>
+        </a>
+
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+    </div>
+
+    <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1">
+
+        <!-- Dashboards -->
+        <li class="menu-item @(currentControllerName == "store" || currentControllerName == "home" ? "active": "")">
+            <a href="/Store" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Basic">Dashboard</div>
+            </a>
+        </li>
+
+        <!-- User Management -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Mağaza Yönetimi</span></li>
+        <li class="menu-item @(currentControllerName == "details" ? "active": "")">
+            <a href="/Store/Details" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-store"></i>
+                <div data-i18n="Basic">Mağaza Bilgileri</div>
+            </a>
+        </li>
+        <li class="menu-item @(currentControllerName == "ımage" ? "active": "")">
+            <a href="/Store/Image" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-image"></i>
+                <div data-i18n="Basic">Resimler</div>
+            </a>
+        </li>
+        <li class="menu-item @(currentControllerName == "comment" ? "active": "")">
+            <a href="/Store/Comment" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-lock-alt"></i>
+                <div data-i18n="Basic">Değerlendirmeler</div>
+            </a>
+        </li>
+        @* <li class="menu-item @(currentControllerName == "contact" ? "active": "")">
+            <a href="/Store/ContactForm" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Basic">İletişim Formları</div>
+            </a>
+        </li> *@
+    </ul>
+
+</aside>
+<!-- / Menu -->

@@ -1,0 +1,82 @@
+﻿
+@model List<Store>
+
+<div class="amazing-deals">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="section-heading text-center">
+                    <h1>Dükkanlar</h1>
+                </div>
+            </div>
+
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="image">
+                                        <img src="~/site/assets/images/YılmazOtoBakım.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 align-self-center">
+                                    <div class="content">
+                                        <span class="info">@item.Address.City.CityName Sanayi Sitesi</span>
+                                        <h4>@item.StoreName</h4>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <i class="fa fa-clock"></i>
+                                                <span class="list">@item.OpeningTime-@item.ClosingTime</span>
+                                            </div>
+                                            <div class="col-6">
+                                                <i class="fa fa-map"></i>
+                                                <span class="list">@item.Address.City.CityName</span>
+                                            </div>
+                                        </div>
+                                        <p>Otomobil bakımının adresi</p>
+                                        <div class="main-button">
+                                            <a asp-area="" asp-controller="Home" asp-action="Store" asp-route-Id="@item.Id">Mağaza Sayfası</a>
+                                            <a asp-area="" asp-controller="Account" asp-action="ToggleFavourites" asp-route-StoreId="@item.Id" class="favorite-link">
+                                                <i class="fa-solid fa-star fa-beat" style="color: #e3c635;"></i>
+                                                Favoriye Ekle
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            @* 
+            <div class="col-lg-12">
+                <ul class="page-numbers">
+                    <li><a href="#"><i class="fa fa-arrow-left"></i></a></li>
+                    <li><a href="#">1</a></li>
+                    <li class="active"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#"><i class="fa fa-arrow-right"></i></a></li>
+                </ul>
+            </div> *@
+        </div>
+    </div>
+</div>
+
+<div class="call-to-action">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h2>Sanayide güvenilir dükkan mı arıyorsun?</h2>
+                <h4>SanayiYolu seninle</h4>
+            </div>
+            <!-- <div class="col-lg-4">
+              <div class="border-button">
+                <a href="reservation.html">Dükkanlar</a>
+              </div>
+            </div> -->
+        </div>
+    </div>
+</div>

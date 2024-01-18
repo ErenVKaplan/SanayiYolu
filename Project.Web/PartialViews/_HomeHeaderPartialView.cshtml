@@ -1,0 +1,39 @@
+﻿<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/Home/Index" class="logo">
+                        <img src="~/site/assets/images/SanayiYoluTransparan.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index" class="active">Anasayfa</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Stores">Mağazalar</a></li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a asp-area="" asp-controller="Account" asp-action="Favourites">Favoriler</a></li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="Profile">Profil</a></li>
+                            <li><a asp-area="" asp-controller="Auth" asp-action="Logout">Çıkış Yap</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-area="" asp-controller="Auth" asp-action="UserLogin">Giriş</a></li>
+                            <li><a asp-area="" asp-controller="Auth" asp-action="StoreLogin">Mağaza Giriş</a></li>
+                        }
+
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->

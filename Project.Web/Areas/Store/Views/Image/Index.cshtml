@@ -1,0 +1,52 @@
+﻿@model List<StoreImage>
+
+@section Styles {
+}
+@section Scripts {
+    <script src="~/site/assets/js/jquery.min.js"></script>
+    <script src="~/sneat/assets/js/ui-carousel.js"></script>
+}
+
+<h4 class="fw-bold py-3 mb-4">
+    <span class="text-muted fw-light">Resim Yönetimi /</span> Mağaza Resimleri
+</h4>
+
+<form asp-area="Store" asp-controller="Image" asp-action="CreateImages" method="post" enctype="multipart/form-data">
+
+    <div class="form-group mb-4">
+        <label for="Images" class="form-label">Resim(ler) Seçiniz</label>
+        <input name="Images" type="file" class="form-control" accept="image/*" multiple required />
+    </div>
+    <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Add</button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <div class="col-md-8">
+        <div class="h-100">
+    <div class="row">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <div class="carousel-item @(i == 0 ? "active":"")">
+                        <img class="d-block w-100" src="~/images/@Model.ElementAt(i).Image.FileName" alt="First slide">
+                    </div>
+                }
+
+            </div>
+            <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+            </div>
+        </div>
+
+    </div>
+}

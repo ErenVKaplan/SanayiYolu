@@ -1,0 +1,103 @@
+﻿@model Store
+
+<div class="d-flex justify-content-between">
+    <h4 class="fw-bold py-3 mb-4">
+        <span class="text-muted fw-light"></span> Mağazam
+    </h4>
+
+    @if (!Model.OnAir)
+    {
+        if (Model.Images.Any() && Model.StoreDescription != null && Model.StoreSlogan != null && Model.CrewSize != null && Model.OpeningTime != null && Model.ClosingTime != null)
+        {
+            <form asp-area="Store" asp-controller="Home" asp-action="ToggleOnAir">
+                <button type="submit" class="btn btn-primary">Mağazayı Yayına Al</button>
+            </form>
+        }
+    }
+    else
+    {
+        <form asp-area="Store" asp-controller="Home" asp-action="ToggleOnAir">
+            <button type="submit" class="btn btn-warning">Mağazayı Yayından Kaldır</button>
+        </form>
+    }
+</div>
+
+
+@if (!Model.OnAir)
+{
+    <div class="alert alert-info d-flex" role="alert">
+        <span class="badge badge-center rounded-pill bg-warning border-label-warning p-3 me-2"><i class="bx bx-wallet fs-6"></i></span>
+        <div class="d-flex flex-column ps-1">
+            <h6 class="alert-heading d-flex align-items-center mb-1">Dikkat!!</h6>
+            <span>Mağazanız şu anda site arayüzümüzde görüntülenemiyor.</span>
+        </div>
+    </div>
+    <div class="alert alert-info d-flex mb-5" role="alert">
+        <span class="badge badge-center rounded-pill bg-warning border-label-warning p-3 me-2"><i class="bx bx-wallet fs-6"></i></span>
+        <div class="d-flex flex-column ps-1">
+            <h6 class="alert-heading d-flex align-items-center mb-1">Dikkat!!</h6>
+            <span>Eğer yayın gereksinimlerini sağlıyorsanız sağ üstteki butona basarak mağazanızı yayına alabilirsiniz.</span>
+        </div>
+    </div>
+
+    @if (Model.StoreDescription == null)
+    {
+        <div class="alert alert-danger d-flex" role="alert">
+            <span class="badge badge-center rounded-pill bg-warning border-label-warning p-3 me-2"><i class="bx bx-wallet fs-6"></i></span>
+            <div class="d-flex flex-column ps-1">
+                <h6 class="alert-heading d-flex align-items-center mb-1">Gereksinim sağlanmamış!!</h6>
+                <span>Mağaza açıklamasını belirmeden mağazanızı yayına alamazsınız.</span>
+            </div>
+        </div>
+    }
+    @if (Model.StoreSlogan == null)
+    {
+        <div class="alert alert-danger d-flex" role="alert">
+            <span class="badge badge-center rounded-pill bg-warning border-label-warning p-3 me-2"><i class="bx bx-wallet fs-6"></i></span>
+            <div class="d-flex flex-column ps-1">
+                <h6 class="alert-heading d-flex align-items-center mb-1">Gereksinim sağlanmamış!!</h6>
+                <span>Mağaza sloganını belirmeden mağazanızı yayına alamazsınız.</span>
+            </div>
+        </div>
+    }
+    @if (Model.CrewSize == null)
+    {
+        <div class="alert alert-danger d-flex" role="alert">
+            <span class="badge badge-center rounded-pill bg-warning border-label-warning p-3 me-2"><i class="bx bx-wallet fs-6"></i></span>
+            <div class="d-flex flex-column ps-1">
+                <h6 class="alert-heading d-flex align-items-center mb-1">Gereksinim sağlanmamış!!</h6>
+                <span>Mağazada çalışan sayısını belirmeden mağazanızı yayına alamazsınız.</span>
+            </div>
+        </div>
+    }
+    @if (Model.OpeningTime == null)
+    {
+        <div class="alert alert-danger d-flex" role="alert">
+            <span class="badge badge-center rounded-pill bg-warning border-label-warning p-3 me-2"><i class="bx bx-wallet fs-6"></i></span>
+            <div class="d-flex flex-column ps-1">
+                <h6 class="alert-heading d-flex align-items-center mb-1">Gereksinim sağlanmamış!!</h6>
+                <span>Mağazanın açılış saatini belirmeden mağazanızı yayına alamazsınız.</span>
+            </div>
+        </div>
+    }
+    @if (Model.ClosingTime == null)
+    {
+        <div class="alert alert-danger d-flex" role="alert">
+            <span class="badge badge-center rounded-pill bg-warning border-label-warning p-3 me-2"><i class="bx bx-wallet fs-6"></i></span>
+            <div class="d-flex flex-column ps-1">
+                <h6 class="alert-heading d-flex align-items-center mb-1">Gereksinim sağlanmamış!!</h6>
+                <span>Mağazanın kapanış saatini belirmeden mağazanızı yayına alamazsınız.</span>
+            </div>
+        </div>
+    }
+    @if (Model.Images.Count() == 0)
+    {
+        <div class="alert alert-danger d-flex" role="alert">
+            <span class="badge badge-center rounded-pill bg-warning border-label-warning p-3 me-2"><i class="bx bx-wallet fs-6"></i></span>
+            <div class="d-flex flex-column ps-1">
+                <h6 class="alert-heading d-flex align-items-center mb-1">Gereksinim sağlanmamış!!</h6>
+                <span>Mağazanıza ait en az bir resim yüklemeniz gerekmektedir.</span>
+            </div>
+        </div>
+    }
+}

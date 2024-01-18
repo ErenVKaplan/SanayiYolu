@@ -1,0 +1,205 @@
+﻿
+@model Store
+
+@section Styles {
+    <!-- Slick Carousel Css -->
+    <link rel="stylesheet" href="~/site/assets/css/foundation-float.min.css" />
+    <link rel="stylesheet" href="~/site/assets/css/slick-theme.css" />
+    <link rel="stylesheet" href="~/site/assets/scss/_bootstrap-extended/slickslider.scss" />
+    <!-- Comment CSS -->
+    <link rel="stylesheet" href="~/site/assets/css/comment.css" />
+}
+@section Scripts {
+    <!-- Slick Carousel -->
+    <script src="~/site/assets/js/jquery.min.js"></script>
+    <script src="~/site/assets/js/slick.js"></script>
+    <script src="~/site/assets/js/slickslider.js"></script>
+    <!-- Comment JS -->
+    <script src="~/site/assets/js/comment.js"></script>
+
+    <script>
+        document.getElementById('review-score').addEventListener('input', function () {
+            // Değeri gösterilen alanı güncelle
+            document.getElementById('sliderValue').innerText = this.value + ' / 5';
+            $('#review-score').attr('value', this.value);
+        });
+    </script>
+}
+
+<div class="more-about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 align-self-center">
+                <!-- <div class="left-image">
+                  <img src="assets/images/about-left-image.jpg" alt="">
+                </div> -->
+                <!-- Bootstrap carousel -->
+                <div class="column small-11 small-centered">
+                    <div class="cSlider cSlider--single">
+                        @for (int i = 0; i < Model.Images.Count(); i++)
+                        {
+                            <div class="cSlider__item"><img src="~/images/@Model.Images.ElementAt(i).Image.FileName" alt="Slide @(i+1)"></div>
+                        }
+
+                    </div>
+                    <div class="row mb-4">
+                        <div class="cSlider cSlider--nav">
+                            @for (int i = 0; i < Model.Images.Count(); i++)
+                            {
+                                <div class="cSlider__item"><img src="~/images/@Model.Images.ElementAt(i).Image.FileName" alt="Slide @(i+1)"></div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- / Bootstrap carousel -->
+            </div>
+            <div class="col-lg-6">
+                <div class="section-heading">
+                    <h1>@Model.StoreName</h1>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="info-item">
+                            <h4 style="color: #22b3c1" ;>@Model.CrewSize</h4>
+                            <span>Çalışan Sayısı</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="info-item">
+                            <h4 style="color: #22b3c1" ;>@Model.OpeningTime - @Model.ClosingTime</h4>
+                            <span>Açılış - Kapanış</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="info-item">
+                            <div class="row">
+                                <h4 style="color: #22b3c1";>@Model.StoreSlogan</h4style>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>@Model.StoreDescription</p>
+
+                <div class="row">
+                    <div class="main-button">
+                        <a asp-area="" asp-controller="Home" asp-action="Stores">Diğer Mağazalar</a>
+                    </div>
+                    <div class="main-button">
+                        <a href="javascript:void(0);" onclick="showPopup()">Değerlendirmede Bulun</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="row my-2">
+            <div class="col-md-12 col-lg-10 col-xl-8">
+                <h1>Yorumlar</h1>
+                <div class="card" style="border-radius:10px;">
+                    <div class="card-body p-4">
+                        @* <h4 class="text-center mb-4 pb-2">Nested comments section</h4> *@
+                        
+                        <div class="row">
+                            <div class="col">
+                                @foreach (StoreComment comment in Model.Comments)
+                                {
+                                    <div class="d-flex flex-start">
+                                        @* <img class="rounded-circle shadow-1-strong me-3"
+                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65"
+                                    height="65" /> *@
+                                        <div class="flex-grow-1 flex-shrink-1">
+                                            <div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <p class="mb-1">
+                                                        @comment.User.FirstName @comment.User.LastName <span class="small">- @comment.CreatedDate.ToString("dd MMMM yyy")</span>
+                                                    </p>
+                                                    @* <a href="javascript:void(0);" onclick="showPopup()"><i class="fas fa-reply fa-xs"></i><span class="small">Yanıtla</span></a> *@
+                                                </div>
+                                                <p class="small mb-0">
+                                                    @comment.MessageContent
+                                                </p>
+                                            </div>
+
+                                           
+                                            @* <div class="d-flex flex-start mt-4">
+                                                <a class="me-3" href="#">
+                                                     <img class="rounded-circle shadow-1-strong"
+                                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
+                                                width="65" height="65" /> 
+                                                </a>
+                                                <div class="flex-grow-1 flex-shrink-1">
+                                                    <div>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="mb-1">
+                                                                John Smith <span class="small">- 4 hours ago</span>
+                                                            </p>
+                                                            <a href="javascript:void(0);" onclick="showPopup()"><i class="fas fa-reply fa-xs"></i><span class="small">Yanıtla</span></a>
+                                                        </div>
+                                                        <p class="small mb-0">
+                                                            the majority have suffered alteration in some form, by
+                                                            injected humour, or randomised words.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div> *@
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup-container" id="replyPopup">
+            <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+                <form asp-area="" asp-controller="Account" asp-action="CreateComment" method="post">
+                    <div class="d-flex flex-start w-300">
+
+                        <input name="StoreId" value="@Model.Id" hidden/>
+                        <div class="form-outline w-300">
+                            <label class="form-label" for="textAreaExample">Puanınız</label><div class="d-flex justify-content-between">
+                                <label style="font-size:20px;" id="sliderValue">1 / 5</label>
+                            </div>
+                            <input type="range" class="form-control" id="review-score" name="Score" min="1" max="5" step="1" value="1" required>
+                        </div>
+                    </div>
+                        <div class="d-flex flex-start w-300">
+
+                        <div class="form-outline w-300">
+                            <label class="form-label" for="textAreaExample">Yorumunuz</label>
+                            <textarea name="MessageContent" class="form-control" id="textAreaExample" rows="4" style="background: #fff;" required></textarea>
+                        </div>
+                    </div>
+                    <div class="float-end mt-2 pt-1">
+                        <button type="submit"  class="btn btn-primary btn-sm">Gönder</button>
+                        <button type="button" onclick="closePopup()" class="btn btn-outline-primary btn-sm">Çıkış</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="call-to-action">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h2>Sanayide güvenilir dükkan mı arıyorsun?</h2>
+                <h4>SanayiYolu seninle</h4>
+            </div>
+            <!-- <div class="col-lg-4">
+              <div class="border-button">
+                <a href="reservation.html">Dükkanlar</a>
+              </div>
+            </div> -->
+        </div>
+    </div>
+</div>
